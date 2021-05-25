@@ -78,7 +78,7 @@
         var word = '';
         var page = null;
 
-        $('[data-js="search-btn"]').on('click', function (e) {
+        $('[data-js="search-btn"]').on('click', function () {
           page = 1;
           word = $('[data-js="search-word"]').val();
           searchReset();
@@ -118,8 +118,7 @@
               hits: '20',
               page: page
             }
-          }).done(function (data){ // ajax通信に成功したとき
-            // console.log(data)
+          }).done(function (data){ 
             if (data.count === 0) {
               $('.message').append('検索結果が見つかりませんでした。</br>別のキーワードで検索して下さい。');
               return false; 
@@ -127,12 +126,11 @@
             showList(data);
             showPager(data);
 
-          }).fail(function (error){  // ajax通信に失敗したとき
+          }).fail(function (error){
             var message = '';
-
             switch (error.status) {
               case 0:
-                message = '<p class="error-message">通信に失敗しました。インターネットの接続をご確認ください。</p>'
+                message = '<p class="error-message">通信に失敗しました。インターネットの接続をご確認ください。</p>';
                 break;
               case 400:
                 message = '<p class="error-message">検索文字が入力されていません。</p>';
@@ -188,7 +186,7 @@
           }
         }
 
-        function searchReset(searchWord) {
+        function searchReset() {
           $('.message').empty();
           $('.lists').empty();
           $('[data-js="pager"]').remove();
